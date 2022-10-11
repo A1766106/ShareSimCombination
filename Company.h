@@ -21,6 +21,7 @@ class Company:public Investor
         void Company_Display_Results_Test(); // Test for Displaying Results   
         void Set_Director_Count(); // Sets Director count
         void Set_Names(); // Sets Director names
+        void Print(); // Overloading inherited function
         ~Company(); // Destructor
 };
 

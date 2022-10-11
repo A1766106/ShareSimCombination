@@ -8,6 +8,8 @@
 #include <stdlib.h>
 #include <fstream>
 #include <sstream>
+#include <chrono>
+#include <thread>
 
 using namespace std;
 
@@ -132,6 +134,38 @@ void Company::Set_Names()
             }
     }
     Information.close();
+}
+
+void Company::Print()
+{
+    Investor::Print();
+    ofstream Printed_Portfolio;
+    Printed_Portfolio.open("Trust Portfolio Report.csv");
+    int Share_Count = Investors_Portfolio->Get_Share_Count();
+    Printed_Portfolio << "Report for Company Investors" << endl;
+    Printed_Portfolio << "Company Name: " << Registered_Name << endl;
+    for(int i=0;i<Number_Of_Directors;i++)
+    {
+        Printed_Portfolio << "Trustee Number: " << i+1 << endl;
+        Printed_Portfolio << "\t First Name: " << Director_First_Name[i] << endl;
+        Printed_Portfolio << "\t Last Name: " << Director_Last_Name[i] << endl;
+    }
+    for(int i=0;i<Share_Count;i++)
+    {        
+        int Temp_Units = Investors_Portfolio->Units(i);
+        int Temp_Current_Price = Investors_Portfolio->Current_Price(i);
+        int Temp_Previous_Price = Investors_Portfolio->Previous_Price(i);
+        string Temp_Name = Investors_Portfolio->Name(i);
+        Printed_Portfolio << "Share Number " << i+1 << " - " << Temp_Name << endl;
+        Printed_Portfolio << "\t Units: " << Temp_Units << endl;
+        Printed_Portfolio << "\t Current Price: $" << Temp_Current_Price << endl;
+        Printed_Portfolio << "\t Previous Price: $" << Temp_Previous_Price << endl;
+        Printed_Portfolio << "\t 12 Month Price Change: $" << (Temp_Current_Price-Temp_Previous_Price)*Temp_Units << endl;
+    }
+    Printed_Portfolio << "Your Bank Balance is furthermore: $" << Investors_Portfolio->Get_Cash() << endl;
+    Printed_Portfolio.close();
+    cout << "Please find your report called \"Trust Portfolio Report\" " << endl;
+    this_thread::sleep_for(chrono::seconds(2));
 }
 
 Company::~Company()

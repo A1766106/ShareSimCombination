@@ -22,6 +22,7 @@ class Trust:public Investor
         void Trust_Display_Results_Test(); // Test for Displaying Results   
         void Set_Bene_Count(); // Sets Beneficiary count
         void Set_Names(); // Sets Beneficiary and Trustee Names
+        void Print(); // Overloading inherited function
         ~Trust(); // Destructor
 };
 
