@@ -13,7 +13,7 @@ Portfolio::Portfolio()
     User_Shares = new Share[20];
     Share_Count = 0;
     Current_Year = 2014;
-    cout << "How much cash would you like to invest? ";
+    cout << "How much cash would you like to start with? ";
     cin >> Cash;
     while(Cash < 0)
     {
@@ -45,9 +45,11 @@ void Portfolio::Buy_Share(std::string Ticker, int Current_Year, int Units)
             }
             else
             {
-                User_Shares[Index_For_Stock] = Share(Ticker, Current_Year, Units);
+                int Temp_Units = User_Shares[Index_For_Stock].Get_Units();
+                User_Shares[Index_For_Stock] = Share(Ticker, Current_Year, Units+Temp_Units);
                 Cash = Cash - (User_Shares[Index_For_Stock].Get_Price(Current_Year)*Units);
                 cout << "You have bought " << User_Shares[Index_For_Stock].Get_Name() << endl;
+                this_thread::sleep_for(chrono::seconds(2));
             }
         }
         else
@@ -71,7 +73,7 @@ void Portfolio::Sell_Share(std::string Ticker, int Current_Year, int Units)
     {
         if(User_Shares[i].Get_Ticker() == Ticker)
         {
-            if(User_Shares[i].Get_Units() <= Units)
+            if(User_Shares[i].Get_Units() < Units)
             {
                 cout << "You dont have enough units to sell!! " << endl;
                 this_thread::sleep_for(chrono::seconds(1));
@@ -121,7 +123,9 @@ void Portfolio::Display_Portfolio()
         cout << Temp_Units * Temp_Current_Price << " 12 Month Stock Change: $" << (Temp_Units*Temp_Current_Price) - (Temp_Units*Temp_Previous_Price) << endl;
     }
     cout << "Your Bank Balance is furthermore: $" << Cash << endl;
-    this_thread::sleep_for(chrono::seconds(3));
+    cout << "Press enter to return to main page" << endl;
+    cin.ignore();
+    cin.get();
 
 }
 
@@ -195,6 +199,30 @@ int Portfolio::Find_Stock_Index(std::string Ticker)
 int Portfolio::Get_Year()
 {
     return Current_Year;
+}
+
+int Portfolio::Units(int Share_Number)
+{
+    return User_Shares[Share_Number].Get_Units();
+}
+
+int Portfolio::Current_Price(int Share_Number)
+{
+    return User_Shares[Share_Number].Get_Price(Current_Year);
+}
+int Portfolio::Previous_Price(int Share_Number)
+{
+    return User_Shares[Share_Number].Get_Price(Current_Year-1);
+}
+
+std::string Portfolio::Name(int Share_Number)
+{
+    return User_Shares[Share_Number].Get_Name();
+}
+
+double Portfolio::Get_Cash()
+{
+    return Cash;
 }
 
 Portfolio::~Portfolio() ///////////////////////////////////////// Need to fix destructor error

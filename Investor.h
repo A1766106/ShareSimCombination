@@ -22,7 +22,6 @@ class Investor: public User
         void Get_Recommendations(); // Prints out brokers recommendations
         void Change_Balance(int Transaction); // Changes user balance according to amount given
         void Display_Portfolio(); // Displays Users Portfolio on screen
-        void Get_Stock_Price(std::string Ticker); // Displayes stock information on screen for current year
         void Buy(); // Buys Stock
         void Sell(); // Sells Stock
         void Go_To_Next_Financial_Year();  // Increases current year by one
@@ -30,6 +29,8 @@ class Investor: public User
         void Set_Broker(int ID); // Sets broker ID per given;
         void Remove_Broker(); // Removes Broker
         double Get_Balance(); // Returns Balance
+        virtual void Print(); // Prints portfolio to csv
+
     
 };
 

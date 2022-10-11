@@ -17,8 +17,8 @@ class Individual:public Investor
         Individual(); // Default constructor
         Individual(int ID); // Constructor 
         void Get_Individual_Details(); // Sets user First Name and Last Name Per Accounts.csv
-        void Print_Individual_Portfolio(); // Creates CSV of portfolio with personalised details for Individual
         void Individual_Display_Results_Test(); // Test for Displaying Results
+        void Print(); // Overloading inherited function
         ~Individual(); // Destructor
 };
 

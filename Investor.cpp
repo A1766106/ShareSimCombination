@@ -60,12 +60,30 @@ void Investor::Display_Options()
             }
             else if(Option == "2")
             {
-                system("Clear");
-                Display_Portfolio();
+                if(Current_Year == Investors_Portfolio->Get_Year())
+                {
+                    system("Clear");
+                    cout << "Sorry this option isn't avaliable when you are in the 2014 Financial Year! " << endl;
+                    this_thread::sleep_for(chrono::seconds(2));
+                    system("Clear");
+                }
+                else {
+                    Display_Portfolio();
+                }
+                
             }
             else if(Option == "3")/////////////////////////////////////
             {
-                
+                if(Current_Year == Investors_Portfolio->Get_Year())
+                {
+                    system("Clear");
+                    cout << "Sorry this option isn't avaliable when you are in the 2014 Financial Year! " << endl;
+                    this_thread::sleep_for(chrono::seconds(2));
+                    system("Clear");
+                }
+                else {
+                    Print();
+                }
             }
 
             else if(Option == "4")
@@ -79,7 +97,9 @@ void Investor::Display_Options()
                 {
                     cout << "Stock Name: " << Temp_Share.Get_Name() << endl;
                     cout << "Current price: " << Temp_Share.Get_Price(Investors_Portfolio->Get_Year()) << endl;
-                    this_thread::sleep_for(chrono::seconds(3));
+                    cout << "Press enter to return to main page" << endl;
+                    cin.ignore();
+                    cin.get();
                 }
             }
             else if(Option == "5")
@@ -106,6 +126,7 @@ void Investor::Display_Options()
             }
             else if(Option == "6")
             {
+                system("Clear");
                 Remove_Broker();
             }
             else if(Option == "7")
@@ -165,7 +186,9 @@ void Investor::Get_Recommendations()
     {
         cout << Temp_Recommendation[i] << endl;
     }
-    this_thread::sleep_for(chrono::seconds(3));
+    cout << "Press enter to return to main page" << endl;
+    cin.ignore();
+    cin.get();
 }
 
 bool Investor::Check_Balace(int Transaction)
@@ -187,16 +210,11 @@ void Investor::Display_Portfolio()//////////////////////////////////////////////
     Investors_Portfolio->Display_Portfolio();
 }
 
-void Investor::Get_Stock_Price(std::string Ticker) /////////////////////
-{
-
-}
-
 void Investor::Buy()
 {
     string Temp_Ticker;
     int Temp_Units;
-    cout << "Whats the ticker of the stock you wish to buy? ";
+    cout << "Whats the ticker of the stock you wish to buy? (Case Sensitive) ";
     cin >> Temp_Ticker;
     cout << "How many units would you like to buy? ";
     cin >> Temp_Units;
@@ -217,7 +235,7 @@ void Investor::Sell()
 {
     string Temp_Ticker;
     int Temp_Units;
-    cout << "Whats the ticker of the stock you wish to Sell? ";
+    cout << "Whats the ticker of the stock you wish to Sell? (Case Sensitive) ";
     cin >> Temp_Ticker;
     cout << "How many units would you like to Sell? ";
     cin >> Temp_Units;
@@ -277,4 +295,11 @@ void Investor::Remove_Broker()
 double Investor::Get_Balance()
 {
     return Balance;
+}
+
+void Investor::Print()
+{
+    system("Clear");
+    cout << "Your report has been printed to your file. " << endl;
+    this_thread::sleep_for(chrono::seconds(2));
 }

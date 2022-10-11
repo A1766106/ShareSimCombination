@@ -25,6 +25,11 @@ class Portfolio
         bool Reached_Year_Lower_Bound(); // Returns false if in year 2014<
         int Get_Year(); // Returns year
         int Find_Stock_Index(std::string Ticker); //Finds index of stock in portfolio 
+        int Units(int Share_Number); // Returns Units Of Shares In User Shares at the element requested
+        int Current_Price(int Share_Number); // Returns Price Of Shares In User Shares at the element requested
+        int Previous_Price(int Share_Number); // Returns Price Of Shares In User Shares at the element requested
+        std::string Name(int Share_Number); // Returns name of Share in User Shares at element requested
+        double Get_Cash(); // Returns cash balance
         ~Portfolio();  // Need tp fix destructor error
 
 };

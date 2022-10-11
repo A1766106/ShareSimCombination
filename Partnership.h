@@ -22,6 +22,7 @@ class Partnership:public Investor
         void Partnersip_Display_Results_Test(); // Test for Displaying Results
         void Set_Partners_Count(); // Sets Partner count
         void Set_Partners_Names(); // Sets Partners First Names
+        void Print(); // Overloading inherited function
         ~Partnership(); // Destructor
 
 };
