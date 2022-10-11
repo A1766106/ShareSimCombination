@@ -72,7 +72,7 @@ void Investor::Display_Options()
                 }
                 
             }
-            else if(Option == "3")/////////////////////////////////////
+            else if(Option == "3")
             {
                 if(Current_Year == Investors_Portfolio->Get_Year())
                 {

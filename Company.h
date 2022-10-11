@@ -17,7 +17,6 @@ class Company:public Investor
         Company(); // Default constructor
         Company(int ID); // Constructor
         void Get_Company_Details(); // Sets company name and director details
-        void Print_Trust_portfolio(); // Creates a csv of portfolio personalised for companies
         void Company_Display_Results_Test(); // Test for Displaying Results   
         void Set_Director_Count(); // Sets Director count
         void Set_Names(); // Sets Director names

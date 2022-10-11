@@ -180,7 +180,7 @@ int Console::Create_Account()
             User_Type = 3;
             Account_Number = Create_Trust();
         }
-        else
+        else if (Investor_Type == "4") 
         {
             User_Type = 4;
             Account_Number = Create_Company();

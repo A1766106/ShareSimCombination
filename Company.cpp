@@ -46,11 +46,6 @@ void Company::Get_Company_Details()
 
 }
 
-void Company::Print_Trust_portfolio() /////////////////////////////////////////////
-{
-
-}
-
 void Company::Company_Display_Results_Test()
 {
     cout << "Company name is: " << Registered_Name << endl;
@@ -140,13 +135,13 @@ void Company::Print()
 {
     Investor::Print();
     ofstream Printed_Portfolio;
-    Printed_Portfolio.open("Trust Portfolio Report.csv");
+    Printed_Portfolio.open("Company Portfolio Report.csv");
     int Share_Count = Investors_Portfolio->Get_Share_Count();
     Printed_Portfolio << "Report for Company Investors" << endl;
     Printed_Portfolio << "Company Name: " << Registered_Name << endl;
     for(int i=0;i<Number_Of_Directors;i++)
     {
-        Printed_Portfolio << "Trustee Number: " << i+1 << endl;
+        Printed_Portfolio << "Director Number: " << i+1 << endl;
         Printed_Portfolio << "\t First Name: " << Director_First_Name[i] << endl;
         Printed_Portfolio << "\t Last Name: " << Director_Last_Name[i] << endl;
     }
@@ -164,7 +159,7 @@ void Company::Print()
     }
     Printed_Portfolio << "Your Bank Balance is furthermore: $" << Investors_Portfolio->Get_Cash() << endl;
     Printed_Portfolio.close();
-    cout << "Please find your report called \"Trust Portfolio Report\" " << endl;
+    cout << "Please find your report called \"Company Portfolio Report\" " << endl;
     this_thread::sleep_for(chrono::seconds(2));
 }
 

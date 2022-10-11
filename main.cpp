@@ -67,7 +67,7 @@ int main()
         }
         else if (UserConsole.Get_User_Type() == 4)
         {
-            Partnership U1(Account_ID);
+            Company U1(Account_ID);
         }
         else
         {
