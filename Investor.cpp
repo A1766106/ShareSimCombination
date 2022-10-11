@@ -172,10 +172,10 @@ void Investor::Get_Recommendations()
             getline(ss, Temp_Nothing, ',');
             if(Int_Temp_ID == Broker_ID)
             {
-                Information.close();
                 getline(ss, Temp_Recommendation[0], ',');
                 getline(ss, Temp_Recommendation[1], ',');
                 getline(ss, Temp_Recommendation[2], ',');
+                Information.close();
                 break;
             }
     }

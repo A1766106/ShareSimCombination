@@ -47,8 +47,11 @@ int main()
     if(UserConsole.Logged_In())
     {
         system("Clear");
-        cout << "You Will Begin In The Financial Year 2014" << endl;
-        this_thread::sleep_for(chrono::seconds(2));
+        if(UserConsole.Get_User_Type() == 1 || UserConsole.Get_User_Type() == 2 || UserConsole.Get_User_Type() == 3 || UserConsole.Get_User_Type() == 4)
+        {
+            cout << "You Will Begin In The Financial Year 2014" << endl;
+            this_thread::sleep_for(chrono::seconds(2));
+        }
         if(UserConsole.Get_User_Type() == 0)
         {
             Broker U1(Account_ID);

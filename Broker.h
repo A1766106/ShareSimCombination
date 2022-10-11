@@ -26,6 +26,13 @@ class Broker:public User
         void Set_Clients(); // Sets Brokers clients
         void Broker_Display_Results_Test(); // Displays features to assist int testing
         std::string *Get_Recommendations(); // Returns array of recommendations
+        void Display_Options(); // Displays options
+        void Print_Clients(); // Displays clients
+        bool Check_Remove_Choice(int Choice); // Returns True if broker has client by given int
+        bool Check_Add_Choice(int Choice); // Returns True if client with ID exists
+        void Replace_ID(int Remove_ID, int Replace_ID); // Swaps given ID's
+        void Swap_Clients(); // Allows user to swap clients
+        void Print_To_CSV(); // Prints clients to csv file
         ~Broker(); // Destructor
 
 };
