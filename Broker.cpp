@@ -262,7 +262,7 @@ void Broker::Display_Options()
             else if(Option == "3")
             {
                 system("Clear");
-
+                Print_To_CSV();
             }
     } 
 }
@@ -303,12 +303,14 @@ void Broker::Print_Clients()
                     {
 
                         cout << "Client Number: " << i+1 << endl;
+                        cout << "Client ID: " << Temp_ID_To_Search << endl;
                         cout << "\t You have a broker saved in as a client and thus this information cant be displayed" << endl;
                         this_thread::sleep_for(chrono::seconds(1));
                     }
                     else if (Temp_Type == "I")
                     {
                         cout << "Client Number: " << i+1 << endl;
+                        cout << "Client ID: " << Temp_ID_To_Search << endl;
                         cout << "\t Client Type: Invdividual" << endl;
                         cout << "\t Client ID: " << Int_Temp_ID << endl;
                         getline(ss, Temp_Nothing, ',');
@@ -319,6 +321,7 @@ void Broker::Print_Clients()
                     else if (Temp_Type == "P")
                     {
                         cout << "Client Number: " << i+1 << endl;
+                        cout << "Client ID: " << Temp_ID_To_Search << endl;
                         cout << "\t Client Type: Partnership" << endl;
                         cout << "\t Client ID: " << Int_Temp_ID << endl;
                         getline(ss, Temp_Partner_Count, ',');
@@ -334,6 +337,7 @@ void Broker::Print_Clients()
                     else if (Temp_Type == "T")
                     {
                         cout << "Client Number: " << i+1 << endl;
+                        cout << "Client ID: " << Temp_ID_To_Search << endl;
                         cout << "\t Client Type: Trust" << endl;
                         cout << "\t Client ID: " << Int_Temp_ID << endl;
                         getline(ss, Temp_Bene_Count, ',');
@@ -358,6 +362,7 @@ void Broker::Print_Clients()
                     else if (Temp_Type == "C")
                     {
                         cout << "Client Number: " << i+1 << endl;
+                        cout << "Client ID: " << Temp_ID_To_Search << endl;
                         cout << "\t Client Type: Company" << endl;
                         cout << "\t Client ID: " << Int_Temp_ID << endl;
                         getline(ss, Temp_Nothing, ',');
@@ -472,7 +477,110 @@ void Broker::Swap_Clients()
 
 void Broker::Print_To_CSV()
 {
-    
+
+    cout << "Your report has been printed" << endl;
+    cout << "Please find it under the name \"Broker Client Report\"" << endl;
+    this_thread::sleep_for(chrono::seconds(2));
+    ofstream Printed_Client;
+    Printed_Client.open("Broker Client Report.csv");
+    Printed_Client << "Report for Brokers" << endl;
+    for(int i=0;i<Client_Count;i++)
+    {
+        Printed_Client << "Client Number: " << i+1 << endl;
+        ifstream Information;
+        Information.open("Accounts.csv");
+        string Temp_ID;
+        int Int_Temp_ID;
+        string Temp_Nothing;
+        string Temp_Partner_Count;
+        string Temp_Bene_Count;
+        string Temp_Trustee_Count;
+        string Temp_Dir_Count;
+        string Account_Types;
+        string line;
+        while(getline(Information, line))
+        {
+                stringstream ss(line);
+                getline(ss, Temp_ID, ',');
+                Int_Temp_ID = stoi(Temp_ID);
+                if(Int_Temp_ID == Clients_ID[i])
+                {
+                    getline(ss,Temp_Nothing, ',');
+                    getline(ss,Account_Types, ',');
+                    if(Account_Types == "B")
+                    {
+                        Printed_Client << "\t ID: " << Int_Temp_ID << endl;
+                        Printed_Client << "\t This is a broker and as such no information can be displayed" << endl;
+                    }
+                    else if(Account_Types == "I")
+                    {
+                        Printed_Client << "\t Investor Type: Individual" << endl;
+                        Printed_Client << "\t Investor ID: " << Int_Temp_ID << endl;
+                        getline(ss,Temp_Nothing,',');
+                        Printed_Client << "\t\t First Name: " << Temp_Nothing << endl;
+                        getline(ss,Temp_Nothing,',');
+                        Printed_Client << "\t\t Last Name: " << Temp_Nothing << endl;
+                    }
+                    else if(Account_Types == "P")
+                    {
+                        Printed_Client << "\t Investor Type: Partnership" << endl;
+                        Printed_Client << "\t Investor ID: " << Int_Temp_ID << endl;
+                        getline(ss,Temp_Partner_Count,',');
+                        for(int i=0;i<stoi(Temp_Partner_Count);i++)
+                        {
+                            Printed_Client << "\t\t Partner Number: " << i+1 << endl;
+                            getline(ss,Temp_Nothing,',');
+                            Printed_Client << "\t\t\t First Name: " << Temp_Nothing << endl;
+                            getline(ss,Temp_Nothing,',');
+                            Printed_Client << "\t\t\t Last Name: " << Temp_Nothing << endl;
+                        }
+                    }
+                    else if(Account_Types == "T")
+                    {
+                        Printed_Client << "\t Investor Type: Trust" << endl;
+                        Printed_Client << "\t Investor ID: " << Int_Temp_ID << endl;
+                        getline(ss,Temp_Trustee_Count,',');
+                        for(int i=0;i<stoi(Temp_Trustee_Count);i++)
+                        {
+                            Printed_Client << "\t\t Trustee Number: " << i+1 << endl;
+                            getline(ss,Temp_Nothing,',');
+                            Printed_Client << "\t\t\t First Name: " << Temp_Nothing << endl;
+                            getline(ss,Temp_Nothing,',');
+                            Printed_Client << "\t\t\t Last Name: " << Temp_Nothing << endl;
+                        }
+                        getline(ss,Temp_Bene_Count,',');
+                        for(int i=0;i<stoi(Temp_Bene_Count);i++)
+                        {
+                            Printed_Client << "\t\t Beneficiary Number: " << i+1 << endl;
+                            getline(ss,Temp_Nothing,',');
+                            Printed_Client << "\t\t\t First Name: " << Temp_Nothing << endl;
+                            getline(ss,Temp_Nothing,',');
+                            Printed_Client << "\t\t\t Last Name: " << Temp_Nothing << endl;
+                        }
+                    }
+                    else if(Account_Types == "C")
+                    {
+                        Printed_Client << "\t Investor Type: Company" << endl;
+                        Printed_Client << "\t Investor ID: " << Int_Temp_ID << endl;
+                        getline(ss,Temp_Nothing,',');
+                        Printed_Client << "\t Company Name: " << Temp_Nothing << endl;
+                        getline(ss,Temp_Dir_Count,',');
+                        for(int i=0;i<stoi(Temp_Dir_Count);i++)
+                        {
+                            Printed_Client << "\t\t Director Number: " << i+1 << endl;
+                            getline(ss,Temp_Nothing,',');
+                            Printed_Client << "\t\t\t First Name: " << Temp_Nothing << endl;
+                            getline(ss,Temp_Nothing,',');
+                            Printed_Client << "\t\t\t Last Name: " << Temp_Nothing << endl;
+                        }
+                    }
+
+                }
+        }
+        Information.close(); 
+                    
+    }
+    Printed_Client.close();
 }
 
 Broker::~Broker()

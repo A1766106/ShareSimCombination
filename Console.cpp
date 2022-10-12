@@ -243,12 +243,12 @@ int Console::Create_Broker()
     int Client_ID[Client_Count];
     for(int j=0;j<Client_Count;j++)
     {
-        cout << "Please provide the default ID's for your clients " << j+1 << " (Or 0 if you dont have enough clients for quota of 3): ";
+        cout << "Please provide the default ID's for your clients " << j+1 << ": ";
         cin >> Client_ID[j];
         while(!Duplicate_ID(Client_ID[j]) && Client_ID[j] != 0)
         {
             cout << "You entered a non-existant ID!" << endl;
-            cout << "Please try again and enter the ID of client number " << j+1 << " (Or 0 if you dont have enough clients for quota of 3): ";
+            cout << "Please try again and enter the ID of client number " << j+1 << ": ";
             cin >> Client_ID[j];
         }
     }
